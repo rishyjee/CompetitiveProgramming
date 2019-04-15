@@ -81,3 +81,29 @@ while t!=0:
                 c=c+1
     print(p-c)       
     t=t-1
+    
+    ***************************
+    
+    LEFT = lambda pos: [pos[0], pos[1]-1]
+RIGHT = lambda pos: [pos[0], pos[1]+1]
+TOP = lambda pos: [pos[0] - 1, pos[1]]
+BOTTOM = lambda pos: [pos[0] + 1, pos[1]]
+MK_STR = lambda pos: f'{pos[0]} {pos[1]}'
+
+for _ in range(int(input())):
+    N,M,K = input().split()
+    dd = {}
+    result = 0
+    for p in range(int(K)):
+        kk = list(map(int, input().split())) 
+        dd[MK_STR(kk)] = kk
+    for k, v in dd.items():
+        if MK_STR(TOP(v)) not in dd:
+            result = result + 1
+        if MK_STR(BOTTOM(v)) not in dd:
+            result = result + 1
+        if MK_STR(RIGHT(v)) not in dd:
+            result = result + 1
+        if MK_STR(LEFT(v)) not in dd:
+            result = result + 1
+    print(result)
