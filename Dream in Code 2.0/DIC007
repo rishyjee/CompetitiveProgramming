@@ -1,0 +1,55 @@
+All submissions for this problem are available.Razo is a brilliant student in maths. One day his mother asked him about his rank in his class, but he didn't like the school's system of ranking so he refused to give the answer. Help Razo's mother to find the rank of his son. School has strange way of ranking the students. They rank students according to lexicographical order of their surnames.
+
+Class contains N+1 students including Razo.
+
+Some characters in student's surnames are missing and missing part is replaced with ∗ in the surname. Razo's surname will never contains ∗ in it. You have to tell all possible rank of Razo, when you arrange N surnames with Razo's surname lexicographically.
+
+Input:
+The first line contains integer N (1≤N≤100000), denoting the number of surnames to process.The following N+1 lines contains student's surname, one surname per line.The N+1 th line contains Razo's surname. Each string contains only lowercase Latin letters, its length is between 1 and 100, inclusive.
+
+Output:
+Print all possible rank of Razo in a single line, separated by spaces.
+
+Sample Input 1:
+2
+hacker
+code
+rank
+Sample Output 1 :
+3
+Sample Input 2:
+2
+**cker
+*o*e
+rank
+Sample Output 2:
+1 2 3
+
+Solution:
+
+# No of students in the college.
+n= int(input())
+# Store their names.
+names = [input() for _ in range(n)]
+# Store the name of razo.
+razo = input()
+# Define two empty lists.
+clean, wild = [], []
+
+# Now store those names without * in the clean list and those names with * in wild list
+for name in names:
+    wild.append(name) if '*' in name else clean.append(name)
+clean.append(razo)
+# clean=[sonu,monu,ajay,sanjay,rank]
+# wild=[**cker,*o*e]
+
+total = sorted(clean + [w.replace('*','a') for w in wild])
+# total=[a*cker,ao*e,ajay,monu,rank,sanjay,sonu]
+
+end = len(total) - total[::-1].index(razo) - 1
+# end=7-2-1
+total = sorted(clean + [w.replace('*','z') for w in wild])
+# total=[ajay,monu,rank,sanjay,sonu,z*cker,zo*e]
+start = total.index(razo)
+for i in range(start, end+1, 1):
+    print(i+1, end=' ')
