@@ -1,0 +1,19 @@
+All submissions for this problem are available.A Hippo got an opportunity for internship at Macrosofty. Interviewer gave him a problem which is stated as follows :
+
+Given a string find the number of distinct characters. As Hippo doesn't like programming help him to get selected.
+
+Input:
+A string consisting of lower case letters only
+Output:
+Required output.
+
+Constraints
+1≤len(string)≤100000
+Sample Input:
+hippo
+Sample Output:
+4
+Solutions:
+
+s = input()
+print(len(set(list(s))))
