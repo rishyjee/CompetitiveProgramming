@@ -1,0 +1,155 @@
+Solution 1:
+
+import math
+def primes():
+ main=set()
+ main.add(2)
+ for i in range(3,31624,2):
+  main.add(i)
+ return main
+def prime1(a,main):
+ for i in main:
+  if(a%i==0):
+   return i
+ return a
+main=primes()
+p=31623**2
+q=22360**2
+t=int(input())
+while(t):
+ t-=1
+ print(1,31623)
+ print(flush=True)
+ r=int(input())
+ print(1,22360)
+ print(flush=True)
+ r1=int(input())
+ x1=p-r
+ x2=q-r1
+ x3=abs(x1-x2)
+ x4=math.gcd(x1,x2)
+ #print(x1,x2,x3,x4)
+ while(True):
+  d=prime1(x4,main)
+  if(p%d==r and q%d==r1 and x1%d==0 and x2%d==0 and x3%d==0):
+   print(2,d)
+   print(flush=True)
+   st=input()
+   break
+  else:
+   x4=x4//d
+ ***************************************************************************
+ Solution 2:
+ 
+# cook your dish here
+import math
+import sys
+from sys import stdin,stdout
+# Sieve of Eratosthenes method to find out number of prime numbers upto n.
+def sieve(n):
+  arr=[True for i in range(n+1)]
+  for i in range(2,n+1):
+    if arr[i]==True:
+      for j in range(i**2,n+1,i):
+        arr[j]=False
+  arr1=[]
+  for i in range(2,len(arr)):
+    if arr[i]==True:
+      arr1.append(i)
+  return arr1
+# Global variable declaration.
+arr=sieve(int(10**(5)))
+
+# It is used to check how many output can be considered
+def factor(n):
+  d=[]
+  for i in arr:
+    if n%i==0:
+      d.append(i)
+      while n%i==0:
+        n=n//i
+    if n==1:
+        break
+  if n!=1:
+    d.append(n)
+  return d
+
+# Real calculation of the number
+def solve(a,b,x,y):
+    t1=a**2-x;t2=b**2-y;
+    t3=math.gcd(t1,t2)
+    lol=factor(t3)
+    for i in lol:
+        if (a**2)%i==x and (b**2)%i==y:
+            return i
+    return 1
+
+# Start from here. Considering, here we have to flush the output. 
+op1=(3**8)*7
+op2=(5**8)*7
+t=int(stdin.readline().strip());sys.stdout.flush()
+for _ in range(t):
+    stdout.write('1 '+str(op1)+'\n');sys.stdout.flush()
+    x=int(stdin.readline().strip());sys.stdout.flush()
+    if x==-1:
+        break
+    stdout.write('1 '+str(op2)+'\n');sys.stdout.flush()
+    y=int(stdin.readline().strip());sys.stdout.flush()
+    if y==-1:
+        break
+    stdout.write('2 '+str(solve(op1,op2,x,y))+'\n');sys.stdout.flush()
+    res=stdin.readline().strip();
+    if res!='Yes':
+        break
+    
+    
+   **********************************************
+   
+   from math import ceil
+
+def primef(n):
+    if n == 1:
+        return []
+    for i in range(2, int(n ** 0.5)+2):
+        if n % i == 0:
+            return [i] + primef(n//i)
+    return [n]
+
+def lowabove(n):
+    x = n ** 0.5
+    return ceil(x)**2
+
+def query(n):
+    print(1, n)
+    x = int(input())
+    return x
+
+def isvalid(primes, test):
+    x = set()
+    for i in set(primes):
+        x.add((test ** 2) % i)
+    return len(x) == len(primes)
+
+def solve():
+    initer = 31625
+    re = query(initer)
+    divof = initer**2 - re
+    divs = set(sorted([x for x in primef(divof) if x <= (10 ** 9)]))
+    l = int(lowabove(max(divs)) ** 0.5)
+    while not isvalid(divs, l):
+        l += 1
+    divs = set(divs)
+    r2 = query(l)
+    for i in divs:
+        if (l ** 2) % i == r2:
+            print(2, i)
+            if input() == "No":
+                assert(False)
+            return
+    
+
+for i in range(int(input())):
+    solve()
+ 
+ 
+ 
