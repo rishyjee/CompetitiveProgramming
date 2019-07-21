@@ -1,0 +1,19 @@
+Chef played an interesting game yesterday. This game is played with two variables X and Y; initially, X=Y=0. Chef may make an arbitrary number of moves (including zero). In each move, he must perform the following process:
+
+Choose any positive integer P such that P⋅P>Y.
+Change X to P.
+Add P⋅P to Y.
+Unfortunately, Chef has a bad memory and he has forgotten the moves he made. He only remembers the value of X after the game finished; let's denote it by Xf. Can you tell him the maximum possible number of moves he could have made in the game?
+
+
+###################
+import math
+for _ in range(int(input())):
+    n=int(input())
+    c=y=x=0
+    p=1
+    while int(math.sqrt(y))+1<=n:
+        p=int(math.sqrt(y))+1
+        c+=1
+        y=y+p*p
+    print(c)
