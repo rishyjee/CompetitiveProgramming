@@ -1,0 +1,35 @@
+All strings in Chefland are beautiful because they are binary strings (a binary string contains only characters '0' and '1'). The beauty of a binary string S is defined as the number of pairs (i,j) (1≤i≤j≤|S|) such that the substring Si,Si+1,…,Sj is special.
+
+For a binary string U, let's denote the number of occurrences of the characters '1' and '0' in U by cnt1 and cnt0 respectively; then, U is special if cnt0=cnt1⋅cnt1.
+
+Today, Chef's friend Araspa is celebrating her birthday. Chef wants to give Araspa the most beautiful binary string he can find. Currently, he is checking out binary strings in a shop, but he needs your help to calculate their beauties. Tell Chef the beauty of each binary string he gives you.
+
+########################3
+cnt1_max = 315
+arr_size = [None]*cnt1_max
+for i in range(1, cnt1_max+1):
+    arr_size[i-1] = (i*(i+1), i)
+
+t = int(input())
+for _t in range(t):
+    s = input().strip()
+    n = len(s)
+    tot1 = [0]*(n+1)
+    for i in range(1, n+1):
+        if s[i-1] == '1':
+            tot1[i] = tot1[i-1] + 1
+        else:
+            tot1[i] = tot1[i-1]
+
+    beauty = 0
+    for size, cnt in arr_size:
+        i = 0
+        limit = n - size
+        while i < limit+1:
+            cnt1 = tot1[i+size] - tot1[i]
+            if cnt1 == cnt:
+                beauty += 1
+                i += 1
+            else:
+                i += abs(cnt1-cnt)
+    print(beauty)
