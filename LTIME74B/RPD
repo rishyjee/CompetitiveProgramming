@@ -1,0 +1,36 @@
+All submissions for this problem are available.### Read problem statements in Hindi, Bengali, Mandarin Chinese, Russian, and Vietnamese as well.
+
+Chef is attending math classes. On each day, the teacher gives him homework. Yesterday, the teacher gave Chef a sequence of positive integers and asked him to find the maximum product of two different elements of this sequence. This homework was easy for Chef, since he knew that he should select the biggest two numbers.
+
+However, today, the homework is a little bit different. Again, Chef has a sequence of positive integers A1,A2,…,AN, but he should find two different elements of this sequence such that the sum of digits (in base 10) of their product is maximum possible.
+
+Chef thought, mistakenly, that he can still select the two largest elements and compute the sum of digits of their product. Show him that he is wrong by finding the correct answer ― the maximum possible sum of digits of a product of two different elements of the sequence A.
+
+Input
+The first line of the input contains a single integer T denoting the number of test cases. The description of T test cases follows.
+The first line of the input contains a single integer N.
+The second line contains N space-separated integers A1,A2,…,AN.
+Output
+For each test case, print a single line containing one integer ― the maximum sum of digits.
+
+*************************************************************************
+
+# cook your dish here
+from itertools import combinations 
+  
+def rSubset(arr, r): 
+    return list(combinations(arr, r)) 
+def sumDigits(no): 
+    return 0 if no == 0 else int(no%10) + sumDigits(int(no/10))
+    
+for tc in range(int(input())):
+    n=int(input())
+    L=list(map(int,input().split()))
+    p=rSubset(L,2)
+    q=[]
+    s=[]
+    for i in range(len(p)):
+        q.append(p[i][0]*p[i][1])
+    for j in range(len(q)):
+        s.append(sumDigits(q[j]))
+    print(max(s))
